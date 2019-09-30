@@ -1,2 +1,2 @@
 # Cryptography
-Programming Encryption Algorithms.
+Programming encryption algorithms.
