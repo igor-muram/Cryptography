@@ -36,7 +36,7 @@ namespace Encoder
 
             // Кодирование текста
             StringBuilder encodedText = new StringBuilder();
-             foreach (var letter in formattedText.ToString())
+            foreach (var letter in formattedText.ToString())
                 encodedText.Append(accordance[letter]);
 
             // Запись закодированного текста
