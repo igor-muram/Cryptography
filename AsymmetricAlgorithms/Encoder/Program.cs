@@ -12,12 +12,8 @@ namespace Encoder
 			a = a % mod;
 			b = b % mod;
 
-			ulong diff = mod > a ? mod - a : a - mod;
-
-			if (b < diff)
-				result = a + b;
-			else
-				result = b - diff;
+			ulong diff = (mod > a) ? (mod - a) : (a - mod);
+			result = (b < diff) ? (a + b) : (b - diff);
 
 			return result % mod;
 		}
@@ -36,7 +32,7 @@ namespace Encoder
 				b >>= 1;
 			}
 
-			return result;
+			return result % mod;
 		}
 
 		static ulong ModularPow(ulong b, ulong exp, ulong mod)
@@ -64,38 +60,42 @@ namespace Encoder
 
 		static void EncodeMSG()
 		{
+			// Чтение и парсинг ключа
 			ulong mod = 0, exp = 0;
 			Console.Write("Enter file with public key: ");
 			string filename = Console.ReadLine();
 			ParseKey(filename, ref mod, ref exp);
 
+			// Чтение сообщения
 			Console.Write("Enter file with message: ");
 			filename = Console.ReadLine();
 			ulong m = ulong.Parse(File.ReadAllText(filename));
 
+			// Шифрование сообщения
 			ulong c = ModularPow(m, exp, mod);
 			File.WriteAllText("EncodedMessage.txt", c.ToString());
 		}
 
 		static void DecodeMSG()
 		{
-
+			// Чтение и парсинг ключа
 			ulong mod = 0, exp = 0;
 			Console.Write("Enter file with private key: ");
 			string filename = Console.ReadLine();
 			ParseKey(filename, ref mod, ref exp);
 
+			// Чтение зашифрованного сообщения
 			Console.Write("Enter file with message: ");
 			filename = Console.ReadLine();
 			ulong m = ulong.Parse(File.ReadAllText(filename));
 
+			// Расшифровка сообщения
 			ulong c = ModularPow(m, exp, mod);
 			File.WriteAllText("DecodedMessage.txt", c.ToString());
 		}
 
 		static void Main(string[] args)
 		{
-
 			Console.WriteLine("1 - Encode message.");
 			Console.WriteLine("2 - Decode message.");
 			int choice = 0;
@@ -105,11 +105,8 @@ namespace Encoder
 				choice = int.Parse(Console.ReadLine());
 			}
 
-			if (choice == 1)
-				EncodeMSG();
-
-			if (choice == 2)
-				DecodeMSG();
+			if (choice == 1)	EncodeMSG();
+			if (choice == 2)	DecodeMSG();
 		}
 	}
 }
