@@ -1,3 +1,6 @@
 # Asymmetric Algorithms
-Encryption and decryption of messages using the asymmetric RSA algorithm.<br>
-Implemented long arithmetic.
+
+<ul>
+  <li>Encryption and decryption of messages using the asymmetric RSA algorithm.</li>
+  <li>Implemented long arithmetic.</li>
+</ul>
